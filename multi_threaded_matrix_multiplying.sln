@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.25807.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "multi_threaded_matrix_multiplying", "multi_threaded_matrix_multiplying\multi_threaded_matrix_multiplying.csproj", "{DEE1513A-BCA5-48CF-8D0F-7330063D3B89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMath", "MyMath\MyMath.csproj", "{F104685D-69B0-4F96-A564-0B2FB40B7708}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEE1513A-BCA5-48CF-8D0F-7330063D3B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE1513A-BCA5-48CF-8D0F-7330063D3B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE1513A-BCA5-48CF-8D0F-7330063D3B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE1513A-BCA5-48CF-8D0F-7330063D3B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F104685D-69B0-4F96-A564-0B2FB40B7708}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F104685D-69B0-4F96-A564-0B2FB40B7708}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F104685D-69B0-4F96-A564-0B2FB40B7708}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F104685D-69B0-4F96-A564-0B2FB40B7708}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
