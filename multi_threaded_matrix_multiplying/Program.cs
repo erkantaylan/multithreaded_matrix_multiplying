@@ -29,8 +29,8 @@ namespace multi_threaded_matrix_multiplying {
             //};
 
             //matrixlere random degerler atanmasi
-            m1.Values = RandomSquareArray(size, maxValueOfNumbers);
-            m2.Values = RandomSquareArray(size, maxValueOfNumbers);
+            m1.Values = Matrix<int>.RandomSquareArray(size, maxValueOfNumbers);
+            m2.Values = Matrix<int>.RandomSquareArray(size, maxValueOfNumbers);
 
             /* Hesaplama suresini en iyi sekilde karsilastirmak icin
              çarpma işlemini birden fazla kez çalıştırıp en iyi ve 
@@ -74,7 +74,10 @@ namespace multi_threaded_matrix_multiplying {
             Console.WriteLine("- With Threads");
             Console.WriteLine($"Best Time  :{best,10}");
             Console.WriteLine($"Worst Time :{worst,10}");
-
+            
+            Console.WriteLine("-- RESULT --");
+            Console.WriteLine(m1.Multiply(m2));
+            Console.WriteLine("------------");
             //            Console.WriteLine(matrix);
             //            Console.WriteLine();
 
@@ -95,15 +98,7 @@ namespace multi_threaded_matrix_multiplying {
         /// <param name="size">matrixin boyutu</param>
         /// <param name="max">matrix icindeki degerlerin alabilecegi maksimum deger</param>
         /// <returns></returns>
-        private static int[,] RandomSquareArray(int size, int max) {
-            var array = new int[size, size];
-            for (int i = 0; i < size; i++) {
-                for (int j = 0; j < size; j++) {
-                    array[i, j] = rd.Next(max + 1);
-                }
-            }
-            return array;
-        }
+
 
         private static void End() {
             Console.WriteLine("#-- End of Program --#");

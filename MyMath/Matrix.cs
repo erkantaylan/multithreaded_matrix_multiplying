@@ -11,6 +11,8 @@ namespace MyMath {
 
         private int rowCount;
         private int columnCount;
+        static Random rd;
+
 
         public T[,] Values;
 
@@ -23,6 +25,12 @@ namespace MyMath {
             ColumnCount = columnCount;
 
             Values = new T[rowCount, columnCount];
+
+            //rd static oldugu icin baska bir obje tarafindan atama yapilmamissa atamasinin gerceklestirilmesi
+            //random isleminin daha guveneilir olamsi icin tek bir random olusturup onun Next degerleri alinmistir
+            if (rd == null) {
+                rd = new Random();
+            }
         }
 
         public int ColumnCount {
@@ -170,6 +178,18 @@ namespace MyMath {
                 }
             }
             return builder.ToString();
+        }
+
+        public static int[,] RandomSquareArray(int size, int max)
+        {
+            var array = new int[size, size];
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++) {
+                    array[i, j] = rd.Next(max + 1);
+                }
+            }
+            return array;
         }
     }
 
