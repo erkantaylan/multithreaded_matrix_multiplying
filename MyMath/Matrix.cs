@@ -3,6 +3,10 @@ using System.Text;
 using System.Threading;
 
 namespace MyMath {
+    /// <summary>
+    /// Matrix islemeri icin generic class
+    /// </summary>
+    /// <typeparam name="T">Sadece sayisal degiskenler olabilir</typeparam>
     public class Matrix<T> where T : new() {
 
         private int rowCount;
@@ -58,11 +62,24 @@ namespace MyMath {
             return result;
         }
 
+        /// <summary>
+        /// Martixin toplama islemi
+        /// A x B = C olsun
+        /// </summary>
+        /// <param name="current">C[x,y]</param>
+        /// <param name="y">A[x,i]</param>
+        /// <param name="z">B[i,y]</param>
+        /// <returns></returns>
         private static T Add(T current, T y, T z) {
             dynamic tx = current, ty = y, tz = z;
             return tx + (ty * tz);
         }
 
+        /// <summary>
+        /// Threadler kullanarak carpma islemi
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <returns></returns>
         public Matrix<T> MultiplyAsync(Matrix<T> matrix) {
             var result = new Matrix<T>(columnCount, matrix.rowCount);
             for (int row = 0; row < rowCount; row++) {
@@ -78,10 +95,13 @@ namespace MyMath {
 
         private void MultiplyAsync(Matrix<T> matrix, Matrix<T> result, int row, int column) {
             result.Values[row, column] = new T();
+            T sum = new T();
             for (int i = 0; i < matrix.rowCount; i++) {
-                result.Values[row, column] = Add(result.Values[row, column], this.Values[row, i], matrix.Values[i, column]);
+                 sum = Add(sum, this.Values[row, i], matrix.Values[i, column]);
             }
+            result.Values[row, column] = sum;
         }
+
 
         public bool IsSquare() {
             return rowCount == columnCount;
@@ -89,6 +109,7 @@ namespace MyMath {
 
         /// <summary>
         /// Determines if a type is numeric.  Nullable numeric types are considered numeric.
+        /// http://stackoverflow.com/a/5182747
         /// </summary>
         /// <remarks>
         /// Boolean is not considered numeric.
@@ -136,6 +157,7 @@ namespace MyMath {
                 return false;
             }
         }
+
 
         public override string ToString() {
             var builder = new StringBuilder();

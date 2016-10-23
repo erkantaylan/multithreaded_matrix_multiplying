@@ -1,5 +1,0 @@
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\bin\Debug\MyMath.dll
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\bin\Debug\MyMath.pdb
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\obj\Debug\MyMath.csprojResolveAssemblyReference.cache
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\obj\Debug\MyMath.dll
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\obj\Debug\MyMath.pdb

@@ -1,4 +1,0 @@
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\bin\Release\MyMath.dll
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\bin\Release\MyMath.pdb
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\obj\Release\MyMath.dll
-D:\CSharp\multi_threaded_matrix_multiplying\MyMath\obj\Release\MyMath.pdb

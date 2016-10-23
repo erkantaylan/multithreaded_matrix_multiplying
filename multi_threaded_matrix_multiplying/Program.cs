@@ -9,10 +9,12 @@ namespace multi_threaded_matrix_multiplying {
         private static readonly Random rd = new Random();
 
         private static void Main(string[] args) {
-            int size = 100;
-            int max = 10;
+            int size = 3; // matrixin n*x lik boyutu
+            int maxValueOfNumbers = 10; // 0 ile bu deger arasinda rastgele degerler atamasi icin
             Matrix<int> m1 = new Matrix<int>(size, size);
             Matrix<int> m2 = new Matrix<int>(size, size);
+
+            //random olmayan 10x10 luk bir matrix
             //matrix.Values = new[,] {
             //    {1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
             //    {2, 3, 4, 5, 6, 7, 8, 9, 10, 1},
@@ -26,15 +28,25 @@ namespace multi_threaded_matrix_multiplying {
             //    {10, 1, 2, 3, 4, 5, 6, 7, 8, 9},
             //};
 
-            m1.Values = RandomSquareArray(size, max);
-            m2.Values = RandomSquareArray(size, max);
+            //matrixlere random degerler atanmasi
+            m1.Values = RandomSquareArray(size, maxValueOfNumbers);
+            m2.Values = RandomSquareArray(size, maxValueOfNumbers);
 
+            /* Hesaplama suresini en iyi sekilde karsilastirmak icin
+             çarpma işlemini birden fazla kez çalıştırıp en iyi ve 
+             en kötü sürelere bakılmıştır.
+             */
+
+            //en iyi süre değişkeni
             long best = long.MaxValue;
+            //en kötü süre değişkeni
             long worst = long.MinValue;
-            int testCount = 100;
+            //deneme sayısı
+            int testCount = 10;
 
             for (int i = 0; i < testCount; i++) {
-                var currentTicks = MeasureFunctionRunTime(m1, m2).Ticks;
+                var currentTicks = MeasureMultiplyRunTime(m1, m2).Ticks;
+                Console.WriteLine($"{i + 1}. {currentTicks}");
                 if (currentTicks < best) {
                     best = currentTicks;
                 }
@@ -50,7 +62,8 @@ namespace multi_threaded_matrix_multiplying {
             best = long.MaxValue;
             worst = long.MinValue;
             for (int i = 0; i < testCount; i++) {
-                var currentTicks = MeasureFunctionRunTimeAsync(m1, m2).Ticks;
+                var currentTicks = MeasureMultiplyRunTimeAsync(m1, m2).Ticks;
+                Console.WriteLine($"{i + 1}. {currentTicks}");
                 if (currentTicks < best) {
                     best = currentTicks;
                 }
@@ -61,8 +74,6 @@ namespace multi_threaded_matrix_multiplying {
             Console.WriteLine("- With Threads");
             Console.WriteLine($"Best Time  :{best,10}");
             Console.WriteLine($"Worst Time :{worst,10}");
-
-
 
             //            Console.WriteLine(matrix);
             //            Console.WriteLine();
@@ -77,32 +88,48 @@ namespace multi_threaded_matrix_multiplying {
 
             End();
         }
-        
 
+        /// <summary>
+        /// iki boyutlu integer degerlerden olusan kare bir matrix olusturur
+        /// </summary>
+        /// <param name="size">matrixin boyutu</param>
+        /// <param name="max">matrix icindeki degerlerin alabilecegi maksimum deger</param>
+        /// <returns></returns>
         private static int[,] RandomSquareArray(int size, int max) {
             var array = new int[size, size];
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
-                    array[i, j] = rd.Next(max);
+                    array[i, j] = rd.Next(max + 1);
                 }
             }
             return array;
         }
 
         private static void End() {
-            Console.WriteLine("End of Program");
+            Console.WriteLine("#-- End of Program --#");
             Console.ReadKey(true);
         }
 
-        private static TimeSpan MeasureFunctionRunTime(Matrix<int> m1, Matrix<int> m2) {
+        /// <summary>
+        /// threadsiz olarak çarpma işleminin süresini hesaplama
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        private static TimeSpan MeasureMultiplyRunTime(Matrix<int> m1, Matrix<int> m2) {
             var stopwatch = Stopwatch.StartNew();
             m1.Multiply(m2);
             stopwatch.Stop();
             return stopwatch.Elapsed;
         }
 
-        private static TimeSpan MeasureFunctionRunTimeAsync(Matrix<int> m1, Matrix<int> m2)
-        {
+        /// <summary>
+        /// threadli olarak matrix çarpmasının süresini hesaplama
+        /// </summary>
+        /// <param name="m1"></param>
+        /// <param name="m2"></param>
+        /// <returns></returns>
+        private static TimeSpan MeasureMultiplyRunTimeAsync(Matrix<int> m1, Matrix<int> m2) {
             var stopwatch = Stopwatch.StartNew();
             m1.MultiplyAsync(m2);
             stopwatch.Stop();
